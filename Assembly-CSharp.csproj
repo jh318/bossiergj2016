@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\FoodController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GetGeneralSpawnCoordinates.cs" />
+     <Compile Include="Assets\Scripts\ObjectPooling.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
