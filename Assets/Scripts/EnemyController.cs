@@ -5,12 +5,14 @@ public class EnemyController : MonoBehaviour {
 
 	private Rigidbody2D body;
 	private Vector2 heading;
+	private PlayerController player;
+
 	public float speed = 100;
 	public float turnspeed = 5;
-	public GameObject player;
 
-	void Start () {
+	void OnEnable () {
 		body = gameObject.GetComponent<Rigidbody2D>();
+		player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
 	}
 	
 	void Update () 
