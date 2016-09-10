@@ -16,6 +16,9 @@ public class EnemySpawnerController : MonoBehaviour {
 		if (Time.frameCount%360.0f == 0){ //check if total frame count is divisiable by 360 frames IE every 6 seconds, spawn enemy
 			Instantiate(enemy); //create instance of object
 		}
+		if (GetGeneralSpawnCoordinates.inArena == true) {
+			Instantiate (enemy);
+		}
 	
 	}
 }
