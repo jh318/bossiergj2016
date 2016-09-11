@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-[RequireComponent(typeof(PolygonCollider2D))]
+
 public class EnemyController : MonoBehaviour {
 
 	private Rigidbody2D body;
