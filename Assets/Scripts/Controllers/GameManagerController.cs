@@ -9,10 +9,9 @@ public class GameManagerController : MonoBehaviour {
 	public Text gameOver;
 	public Text startText;
 
-<<<<<<< HEAD
-	private static FoodController[] foods;
-	private static int score;
-=======
+
+
+
 	public enum State {
 		Waiting,
 		Playing,
@@ -33,7 +32,6 @@ public class GameManagerController : MonoBehaviour {
 		player.gameObject.SetActive (false);
 		nymphSpawner.gameObject.SetActive (false);
 	}
->>>>>>> 8f54bbafc01e6b7676192254d8bf9c8775668f0c
 
 	void Start () {
 		SetScoreText ();
