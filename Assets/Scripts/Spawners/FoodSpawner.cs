@@ -55,4 +55,10 @@ public class FoodSpawner : MonoBehaviour {
         }
         gameObject.SetActive(true);
     }
+
+    public void DisableAll(){
+        foreach (GameObject g in FoodObjectPooling.objectPool) {
+            g.SetActive(false);
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class enemy3ai : MonoBehaviour {
 	private int b = 0;
 	public GameObject borderTop;
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		y = gameObject.transform.position.y;
 		speed = 0;
 		b = Random.Range(-30, 8);
