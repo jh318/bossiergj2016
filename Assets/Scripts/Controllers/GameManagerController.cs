@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManagerController : MonoBehaviour {
 
-	public static FoodController[] foods;
+	private static FoodController[] foods;
 	private static int score;
 
 	void Start () {
