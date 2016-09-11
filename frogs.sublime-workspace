@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Spaw",
+				"SpawnCoroutine"
+			],
+			[
+				"Start",
+				"StartCoroutine"
+			],
+			[
 				"Sta",
 				"StartCoroutine"
 			],
@@ -148,30 +156,6 @@
 	"buffers":
 	[
 		{
-			"file": "Assets/Scripts/PlayerController.cs",
-			"settings":
-			{
-				"buffer_size": 1360,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Managers/GameManager.cs",
-			"settings":
-			{
-				"buffer_size": 6377,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Assets/Scripts/EnemyController.cs",
-			"settings":
-			{
-				"buffer_size": 1042,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Assets/Scripts/powerupcollision.cs",
 			"settings":
 			{
@@ -188,37 +172,26 @@
 			}
 		},
 		{
-			"file": "Assets/Scripts/CameraController.cs",
+			"file": "Assets/Scripts/Spawners/EnemySpawner.cs",
 			"settings":
 			{
-				"buffer_size": 645,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class FoodController : MonoBehaviour {\n\n	public float timeToEat; \n	[HideInInspector] public bool eaten;\n\n	private float timeEating;\n	private AudioSource nomnom;\n\n	void OnEnable () {\n		nomnom = GetComponent<AudioSource> ();\n		timeToEat = Mathf.Floor (Random.Range (1.0f, 5.0f));\n		gameObject.transform.localScale = new Vector3 (timeToEat, timeToEat);\n		eaten = false;\n	}\n\n	void OnCollisionStay2D (Collision2D collision){\n		if (collision.gameObject.tag == \"Player\"){\n			nomnom.pitch += Time.deltaTime/2.0f;\n			if (!nomnom.isPlaying) {\n				nomnom.Play ();\n			}\n			timeEating += Time.deltaTime;\n			if (gameObject.transform.localScale.x>=0.1f && gameObject.transform.localScale.y>=0.1f){\n				gameObject.transform.localScale -= new Vector3 (Time.deltaTime, Time.deltaTime);\n			}\n			if (timeEating >= timeToEat) {\n				eaten = true;\n				nomnom.pitch = 1.0f;\n				GameManagerController.eatFood ();\n			}\n		}\n	}\n}\n",
-			"file": "Assets/Scripts/FoodController.cs",
-			"file_size": 994,
-			"file_write_time": 131180338292430764,
-			"settings":
-			{
-				"buffer_size": 955,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Assets/Scripts/GameManager.cs",
-			"settings":
-			{
-				"buffer_size": 291,
+				"buffer_size": 1080,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/macor_000/Visual Effects Projects/GitHub Projects/JellyHero2/Assets/Paraphernalia/Components/Spawner.cs",
+			"file": "Assets/Scripts/Components/PoolMember.cs",
 			"settings":
 			{
-				"buffer_size": 1109,
+				"buffer_size": 176,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Components/AniminateSpritesComponent.cs",
+			"settings":
+			{
+				"buffer_size": 1202,
 				"line_ending": "Windows"
 			}
 		},
@@ -239,29 +212,10 @@
 			}
 		},
 		{
-			"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/ObjectPooling.cs",
+			"file": "Assets/Scripts/Pooling/ObjectPooling.cs",
 			"settings":
 			{
-				"buffer_size": 607,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class GameManagerController : MonoBehaviour {\n\n	public static FoodController[] foods;\n	private static int score;\n\n	void Start () {\n		\n	}\n	\n	void Update () {\n		eatFood ();\n	}\n\n	public static void eatFood (){\n		foods = FindObjectsOfType(typeof(FoodController)) as FoodController[];\n		foreach (FoodController food in foods) {\n			if (food.eaten == true) {\n				score += (int)food.timeToEat;\n				Debug.Log (\"Score! \" + score.ToString ());\n				food.eaten = false;\n				food.gameObject.SetActive (false);\n				FoodSpawnerController.currentSpawn--;\n			}\n		}\n	}\n}\n",
-			"file": "Assets/Scripts/GameManagerController.cs",
-			"file_size": 637,
-			"file_write_time": 131180289019788416,
-			"settings":
-			{
-				"buffer_size": 605,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/Singleton.cs",
-			"settings":
-			{
-				"buffer_size": 307,
+				"buffer_size": 621,
 				"line_ending": "Windows"
 			}
 		},
@@ -269,7 +223,7 @@
 			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class AniminateSpritesComponent : MonoBehaviour {\n\n    public Sprite[] animationSprites;\n    public float frameInterval = .2f;\n    public bool looping = true;\n    private SpriteRenderer _spriteRenderer;\n\n    public SpriteRenderer spriteRenderer\n    {\n        get\n        {\n            if (_spriteRenderer == null)\n            {\n                _spriteRenderer = GetComponent<SpriteRenderer>();\n            }\n            return _spriteRenderer;\n        }\n    }\n\n    void OnEnable()\n    {\n        StartCoroutine(\"Animate\");\n    }\n\n    IEnumerator Animate()\n    {\n        if (looping)\n        {\n            while (enabled)\n            {\n                for (int i = 0; i < animationSprites.Length; i++)\n                {\n                    spriteRenderer.sprite = animationSprites[i];\n                    yield return new WaitForSeconds(frameInterval);\n                }\n            }\n        }\n        else\n        {\n            for (int i = 0; i < animationSprites.Length; i++)\n            {\n                spriteRenderer.sprite = animationSprites[i];\n                yield return new WaitForSeconds(frameInterval);\n            }\n        }\n    }\n}\n",
 			"file": "Assets/Scripts/AniminateSpritesComponent.cs",
 			"file_size": 1255,
-			"file_write_time": 131067157320000000,
+			"file_write_time": 131180836797083505,
 			"settings":
 			{
 				"buffer_size": 1202,
@@ -322,10 +276,21 @@
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Prefabs",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scenes",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/Pooling",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Textures"
 	],
 	"file_history":
 	[
+		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/Singleton.cs",
+		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/ObjectPooling.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/JellyHero2/Assets/Paraphernalia/Components/Spawner.cs",
+		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Managers/GameManager.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/FoodController.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/GameManagerController.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/CameraController.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/EnemyController.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/PlayerController.cs",
+		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/GameManager.cs",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Scripts/ObjectPooling.cs",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Paraphernalia/Components/Spawner.cs",
 		"/C/Users/macor_000/Visual Effects Projects/GitHub Projects/bossiergj2016/Assets/Paraphernalia/Components/DirectionalBoxCollider2D.cs",
@@ -336,7 +301,6 @@
 		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Controllers/ExplosionController.cs",
 		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Controllers/GunController.cs",
 		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Managers/InventoryManager.cs",
-		"/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Managers/GameManager.cs",
 		"/F/Space Shooter Project_v02/Assets/SpaceShooter/Scripts/Controllers/GunController.cs",
 		"/F/Space Shooter Project_v02/Assets/SpaceShooter/Scripts/Paraphernalia/Components/AudioManager.cs",
 		"/F/Space Shooter Project_v02/Assets/SpaceShooter/Scripts/Paraphernalia/Components/ScaleToViewport.cs",
@@ -446,98 +410,11 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Assets/Scripts/PlayerController.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1360,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								86,
-								86
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 378.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Managers/GameManager.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6377,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1260.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Assets/Scripts/EnemyController.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1042,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "Assets/Scripts/powerupcollision.cs",
 					"semi_transient": false,
 					"settings":
@@ -555,17 +432,18 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.sublime-syntax"
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 1,
 					"file": "Assets/Scripts/Pooling/EnemyObjectPooling.cs",
 					"semi_transient": false,
 					"settings":
@@ -590,83 +468,52 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Assets/Scripts/Spawners/EnemySpawner.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1062,
+								1062
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 14.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "Assets/Scripts/CameraController.cs",
+					"buffer": 3,
+					"file": "Assets/Scripts/Components/PoolMember.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 645,
+						"buffer_size": 176,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								223,
-								306
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "Assets/Scripts/FoodController.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 955,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "Assets/Scripts/GameManager.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 291,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								285,
-								285
+								136,
+								136
 							]
 						],
 						"settings":
@@ -681,36 +528,37 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/C/Users/macor_000/Visual Effects Projects/GitHub Projects/JellyHero2/Assets/Paraphernalia/Components/Spawner.cs",
+					"buffer": 4,
+					"file": "Assets/Scripts/Components/AniminateSpritesComponent.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1109,
+						"buffer_size": 1202,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								46,
+								46
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/C#/C#.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 241.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 5,
 					"file": "/C/Users/macor_000/Visual Effects Projects/GitHub Projects/JellyHero2/Assets/Paraphernalia/Components/NameSingleton.cs",
 					"semi_transient": false,
 					"settings":
@@ -735,11 +583,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 6,
 					"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Space Shooter Project/Assets/SpaceShooter/Scripts/Spawners/FighterSpawner.cs",
 					"semi_transient": false,
 					"settings":
@@ -765,24 +613,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/ObjectPooling.cs",
-					"semi_transient": false,
+					"buffer": 7,
+					"file": "Assets/Scripts/Pooling/ObjectPooling.cs",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 607,
+						"buffer_size": 621,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								18,
+								18
 							]
 						],
 						"settings":
@@ -795,70 +643,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "Assets/Scripts/GameManagerController.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 605,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "/C/Users/macor_000/Visual Effects Projects/Unity Projects/Scripting Review Practice Project/Assets/Scripts/Singleton.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 307,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
+					"buffer": 8,
 					"file": "Assets/Scripts/AniminateSpritesComponent.cs",
 					"semi_transient": false,
 					"settings":
@@ -884,7 +673,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
