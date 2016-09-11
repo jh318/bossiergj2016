@@ -22,7 +22,6 @@ public class GameManagerController : MonoBehaviour {
 				Debug.Log ("Score! " + score.ToString ());
 				food.eaten = false;
 				food.gameObject.SetActive (false);
-				FoodSpawnerController.currentSpawn--;
 			}
 		}
 	}

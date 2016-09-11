@@ -7,11 +7,16 @@ public class FoodSpawner : MonoBehaviour {
     public float spawnSpacing = 2f;
     public int maxSpawn = 10;
     public GameObject objectPrefab;
-    
+
+    public GameObject borderRight; //get arena borders
+    public GameObject borderLeft;
+    public GameObject borderTop;
+    public GameObject borderBottom;
+
     private static bool inArena = false;
     private static int xSpawn = 0;
     private static int ySpawn = 0;
-    
+
 	void OnEnable(){
        StartCoroutine("SpawnCoroutine");
 	}
@@ -32,7 +37,7 @@ public class FoodSpawner : MonoBehaviour {
     }
 
     void Spawn () {
-        foodSpawned = FoodObjectPooling.Spawn(objectPrefab);
+        GameObject foodSpawned = FoodObjectPooling.Spawn(objectPrefab);
         xSpawn = Random.Range (-21, 21); //randomly generate x position between 2 numbers
         ySpawn = Random.Range (-21, 21); //randomly generate y position between 2 numbers
         inArena = false;//obj coord is not in arena

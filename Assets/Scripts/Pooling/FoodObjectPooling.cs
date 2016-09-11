@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class FoodObjectPooling : MonoBehaviour {
 
-	private static List<GameObject> objectPool = new List<GameObject>();
+	public static List<GameObject> objectPool = new List<GameObject>();
 
 	public static GameObject Spawn(GameObject prefab)
 	{
