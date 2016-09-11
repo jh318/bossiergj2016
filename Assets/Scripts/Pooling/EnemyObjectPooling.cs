@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyObjectPooling : MonoBehaviour {
 
-	private static List<GameObject> objectPool = new List<GameObject>();
+	public static List<GameObject> objectPool = new List<GameObject>();
 
 	public static GameObject Spawn(GameObject prefab)
 	{
@@ -23,8 +23,13 @@ public class EnemyObjectPooling : MonoBehaviour {
 		}
 	}
 
-	static bool IsInactiveObject(GameObject g)
+	static public bool IsInactiveObject(GameObject g)
 	{
 		return !g.activeSelf;
 	}
+	
+	static public bool IsActiveObject (GameObject g) {
+        return g.activeSelf;
+    }
+
 }
