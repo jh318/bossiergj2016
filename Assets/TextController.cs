@@ -9,7 +9,7 @@ public class TextController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		text.text = "Hello world";
+		//text.text = "Game Over: Press \"Enter\" to Restart";
 	}
 	
 	// Update is called once per frame
