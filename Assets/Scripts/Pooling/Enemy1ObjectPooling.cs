@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FoodObjectPooling : MonoBehaviour {
+public class Enemy1ObjectPooling : MonoBehaviour {
 
-	private static List<GameObject> objectPool = new List<GameObject>();
+	public static List<GameObject> objectPool = new List<GameObject>();
 
 	public static GameObject Spawn(GameObject prefab)
 	{
@@ -23,7 +23,7 @@ public class FoodObjectPooling : MonoBehaviour {
 		}
 	}
 
-	static bool IsInactiveObject(GameObject g)
+	static public bool IsInactiveObject(GameObject g)
 	{
 		return !g.activeSelf;
 	}
@@ -31,4 +31,5 @@ public class FoodObjectPooling : MonoBehaviour {
 	static public bool IsActiveObject (GameObject g) {
         return g.activeSelf;
     }
+
 }
