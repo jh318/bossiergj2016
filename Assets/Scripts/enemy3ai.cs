@@ -20,4 +20,9 @@ public class enemy3ai : MonoBehaviour {
 		//float y = gameObject.transform.position.y;
 		y += speed;
 	}
+		void OnCollisionEnter2D(Collision2D collision){
+		if (collision.gameObject.tag == "border"){
+			gameObject.SetActive(false);
+		}
+	}
 }

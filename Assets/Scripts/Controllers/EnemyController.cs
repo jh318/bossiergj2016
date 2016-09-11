@@ -28,11 +28,11 @@ public class EnemyController : MonoBehaviour {
         body.velocity = (heading.normalized * speed / Time.fixedDeltaTime);
 	}
 
-	// this will disable the player gameObject.
-	// void OnCollisionEnter2D(Collision2D collision){
-	// 	if (collision.gameObject.tag == "Enemy"){
-	// 		gameObject.SetActive(false);
-	// 	}
-	// }
+	//this will disable the player gameObject.
+	void OnCollisionEnter2D(Collision2D collision){
+		if (collision.gameObject.tag == "KillsEnemy"){
+			gameObject.SetActive(false);
+		}
+	}
 }
 

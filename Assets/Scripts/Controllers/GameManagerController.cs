@@ -22,6 +22,8 @@ public class GameManagerController : MonoBehaviour {
 	private NymphSpawner nymphSpawner;
 	private FoodSpawner foodSpawner;
 	private Enemy1Spawner enemy1Spawner;
+	private Enemy2Spawner enemy2Spawner;
+
 	private static FoodController[] foods;
 	public int score;
 	private PlayerController player;
@@ -33,11 +35,14 @@ public class GameManagerController : MonoBehaviour {
 		nymphSpawner = Object.FindObjectOfType (typeof(NymphSpawner)) as NymphSpawner;
 		foodSpawner = Object.FindObjectOfType (typeof(FoodSpawner)) as FoodSpawner;
 		enemy1Spawner = Object.FindObjectOfType (typeof(Enemy1Spawner)) as Enemy1Spawner;
+		enemy2Spawner = Object.FindObjectOfType (typeof(Enemy2Spawner)) as Enemy2Spawner;
 
 		player.gameObject.SetActive (false);
 		nymphSpawner.gameObject.SetActive (false);
 		foodSpawner.gameObject.SetActive (false);
 		enemy1Spawner.gameObject.SetActive (false);
+		enemy2Spawner.gameObject.SetActive (false);
+
 	}
 
 	void Start () {
@@ -56,6 +61,8 @@ public class GameManagerController : MonoBehaviour {
 				nymphSpawner.Reset ();
 				foodSpawner.Reset ();
 				enemy1Spawner.Reset ();
+				enemy2Spawner.Reset ();
+
 				scoreText.gameObject.SetActive(true);
 				eatFood ();
 				score = 0;
@@ -70,6 +77,7 @@ public class GameManagerController : MonoBehaviour {
 				nymphSpawner.DisableAll ();
 				foodSpawner.DisableAll ();
 				enemy1Spawner.DisableAll ();
+				enemy2Spawner.DisableAll ();
 				startText.gameObject.SetActive (false);
 				gameOver.gameObject.SetActive (true);
 				gameOver.text = "Game Over\nPress \"Enter\" to restart";
