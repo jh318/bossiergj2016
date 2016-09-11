@@ -30,7 +30,7 @@ public class FoodSpawnerController : MonoBehaviour {
 	}
 
 	void Spawn () {
-		foodSpawned = ObjectPooling.Spawn(foodPrefab);
+		foodSpawned = FoodObjectPooling.Spawn(foodPrefab);
 		xSpawn = Random.Range (-21, 21); //randomly generate x position between 2 numbers
 		ySpawn = Random.Range (-21, 21); //randomly generate y position between 2 numbers
 		inArena = false;//obj coord is not in arena
