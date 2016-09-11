@@ -5,11 +5,11 @@ public class CameraController : MonoBehaviour {
 
     public float speed = 3;
     public int stepsAhead = 1;
-    private PlayerController player;
+    public PlayerController player;
 
-    void Start()
-    {
-        player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
+    void Awake()
+    {  
+        //player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
     }
 
     void FixedUpdate()

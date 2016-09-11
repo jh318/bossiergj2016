@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameManagerController : MonoBehaviour {
+
 	public static GameManagerController instance;
 	public Text scoreText;
 	public Text gameOver;
@@ -45,28 +46,31 @@ public class GameManagerController : MonoBehaviour {
 			if (Input.anyKeyDown) {
 				gameState = State.Playing;
 				player.gameObject.SetActive (true);
-				startText.gameObject.SetActive (true);
+				player.transform.position = Vector3.zero;
+				startText.gameObject.SetActive (false);
 				gameOver.gameObject.SetActive (false);
 				nymphSpawner.Reset ();
+				scoreText.gameObject.SetActive(true);
 				eatFood ();
 				score = 0;
+				SetScoreText();
 			}
 			break;
 
 		case State.Playing:
-			gameState = State.GameOver;
-			player.gameObject.SetActive (false);
-			nymphSpawner.gameObject.SetActive (false);
-			startText.gameObject.SetActive (false);
-			gameOver.gameObject.SetActive (true);
-			gameOver.text = "Game Over\nPress \"Enter\" to restart";
+			if (!player.gameObject.activeSelf){
+				gameState = State.GameOver;
+				player.gameObject.SetActive (false);
+				nymphSpawner.gameObject.SetActive (false);
+				startText.gameObject.SetActive (false);
+				gameOver.gameObject.SetActive (true);
+				gameOver.text = "Game Over\nPress \"Enter\" to restart";
+			}
 			break;
 
 		case State.GameOver:
 			if (Input.anyKeyDown) {
 				gameState = State.Waiting;
-				gameOver.gameObject.SetActive (false);
-				startText.gameObject.SetActive (true);
 				startText.text = "Press Any Key to continue.";
 			}
 			break;
