@@ -4,7 +4,6 @@ using System.Collections;
 public class FoodSpawner : MonoBehaviour {
 	
 	public float spawnInterval = 1;
-    public float spawnSpacing = 2f;
     public int maxSpawn = 10;
     public GameObject objectPrefab;
 
