@@ -2,7 +2,6 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(PolygonCollider2D))]
 public class PlayerController : MonoBehaviour {
 	
 	public float speed = 100;
