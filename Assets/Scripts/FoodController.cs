@@ -8,7 +8,8 @@ public class FoodController : MonoBehaviour {
 
 	private float timeEating;
 
-	void Start () {
+	void OnEnable () {
+		timeToEat = Mathf.Floor (Random.Range (1.0f, 5.0f));
 		gameObject.transform.localScale = new Vector3 (timeToEat, timeToEat);
 		eaten = false;
 	}
@@ -22,7 +23,7 @@ public class FoodController : MonoBehaviour {
 			}
 			if (timeEating >= timeToEat) {
 				eaten = true;
-				gameObject.SetActive (false);
+				GameManagerController.eatFood ();
 			}
 		}
 	}

@@ -4,29 +4,26 @@ using System.Collections.Generic;
 
 public class ObjectPooling : MonoBehaviour {
 
-    public GameObject prefab;
+    private static List<GameObject> objectPool = new List<GameObject>();
 
-    private List<GameObject> objectPool = new List<GameObject>();
-
-    void Start()
+	public static GameObject Spawn(GameObject prefab)
     {
-        Spawn();
-    }
-    void Spawn()
-    {
-        GameObject g = objectPool.Find(IsInactiveObject);
+		GameObject g = objectPool.Find(IsInactiveObject);
 
         if (g == null)
         {
             g = Object.Instantiate(prefab) as GameObject;
+			objectPool.Add (g);
+			return g;
         }
         else
         {
             g.SetActive(true);
+			return g;
         }
     }
 
-    bool IsInactiveObject(GameObject g)
+    static bool IsInactiveObject(GameObject g)
     {
        return !g.activeSelf;
     }
