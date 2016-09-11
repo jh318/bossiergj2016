@@ -1,18 +1,15 @@
 fileFormatVersion: 2
-guid: c3f431d5c53ac5d4c956b2361070d975
-timeCreated: 1473549133
+guid: 8beab27bc8f146c4b86059e26ac2acae
+timeCreated: 1473559277
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Tadpole_Sprite_Sheets_0
-    21300002: Tadpole_Sprite_Sheets_1
-    21300004: Tadpole_Sprite_Sheets_2
-    21300006: Tadpole_Sprite_Sheets_3
-    21300008: Tadpole_Sprite_Sheets_4
+    21300000: nymphSheet_0
+    21300002: nymphSheet_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -58,67 +55,28 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tadpole_Sprite_Sheets_0
+      name: nymphSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.51, y: 0.75}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tadpole_Sprite_Sheets_1
+      name: nymphSheet_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.51, y: 0.75}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tadpole_Sprite_Sheets_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.51, y: 0.75}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tadpole_Sprite_Sheets_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.51, y: 0.75}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tadpole_Sprite_Sheets_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.51, y: 0.75}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
